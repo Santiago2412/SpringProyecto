@@ -11,3 +11,4 @@ class DemoApplicationTests {
 	}
 
 }
+//Aparentemente de aquí depende el adminer.

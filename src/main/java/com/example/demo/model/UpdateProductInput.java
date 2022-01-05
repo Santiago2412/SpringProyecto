@@ -2,15 +2,15 @@ package com.example.demo.model;
 
 import java.time.LocalDate;
 
-public class UpdatePersonInput {
+public class UpdateProductInput {
     private String name;
     private LocalDate birthday;
 
 
-    public UpdatePersonInput() {
+    public UpdateProductInput() {
     }
 
-    public UpdatePersonInput(String name, LocalDate birthday) {
+    public UpdateProductInput(String name, LocalDate birthday) {
 
         this.name = name;
         this.birthday = birthday;

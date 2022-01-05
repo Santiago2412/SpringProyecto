@@ -1,62 +1,63 @@
 package com.example.demo.controllers;
 
-import com.example.demo.domain.Person;
-import com.example.demo.domain.PersonId;
-import com.example.demo.domain.PersonName;
-import com.example.demo.model.CreatePersonInput;
-import com.example.demo.model.CreatePersonOutput;
-import com.example.demo.model.UpdatePersonInput;
-import com.example.demo.model.UpdatePersonOutput;
-import com.example.demo.services.PersonServices;
+import com.example.demo.domain.Product;
+import com.example.demo.domain.ProductId;
+import com.example.demo.domain.ProductName;
+import com.example.demo.model.CreateProductInput;
+import com.example.demo.model.CreateProductOutput;
+import com.example.demo.model.UpdateProductInput;
+import com.example.demo.model.UpdateProductOutput;
+import com.example.demo.services.ProductServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/persons")
-public class PersonsController {
-    private final PersonServices services;
+@RequestMapping(value = "/products")
+public class ProductController {
+    private final ProductServices services;
 
-    public PersonsController(PersonServices services) {
+    public ProductController(ProductServices services) {
         this.services = services;
     }
 
 
     @GetMapping
-    public List<Person> listPersons() {
-        return services.listPersons();
+    public List<Product> listProduct() {
+        return services.listProduct();
     }
 
-    @PostMapping
-    public CreatePersonOutput createPerson(@RequestBody CreatePersonInput input) {
-        PersonName personName = new PersonName(input.getName());
+    @PostMapping(value = "/products")
+    public CreateProductOutput createProduct(@RequestBody CreateProductInput input) {
+        ProductName productName = new ProductName(input.getName());
         LocalDate birthday = input.getBirthday();
-        PersonId random = PersonId.random();
-        Person person = new Person(random, personName, birthday);
-        Person createdPerson = services.createPerson(person);
+        ProductId random = ProductId.random();
+        Product product = new Product(random, productName, birthday);
+        Product createdProduct = services.createProduct(product);
 
-        return new CreatePersonOutput(createdPerson);
+        return new CreateProductOutput(createdProduct);
     }
 
 
     @GetMapping(value = "/{id}")
-    public Person getPerson(@PathVariable("id") String personId) {
-        final PersonId id = PersonId.fromString(personId);
-        return services.getPerson(id);
+    public Product getProduct(@PathVariable("id") String productId) {
+        final ProductId id = ProductId.fromString(productId);
+        return services.getProducts(id);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deletePerson(@PathVariable("id") String personId) {
-        final PersonId id = PersonId.fromString(personId);
-        services.deletePerson(id);
+    public void deleteProduct(@PathVariable("id") String productId) {
+        final ProductId id = ProductId.fromString(productId);
+        services.deleteProduct(id);
     }
 
     @PutMapping(value = "/{id}")
-    public UpdatePersonOutput updatePerson(@PathVariable("id") String unsafeId, @RequestBody UpdatePersonInput input) {
-        final PersonId id = PersonId.fromString(unsafeId);
-        Person newPerson = new Person(id, new PersonName(input.getName()), input.getBirthday());
-        final Person updated = services.updatePerson(id, newPerson);
-        return new UpdatePersonOutput(updated);
+    public UpdateProductOutput updateProduct(@PathVariable("id") String unsafeId, @RequestBody UpdateProductInput input) {
+        final ProductId id = ProductId.fromString(unsafeId);
+        Product newProduct = new Product(id, new ProductName(input.getName()), input.getBirthday());
+        final Product updated = services.updateProduct(id, newProduct);
+        return new UpdateProductOutput(updated);
     }
 }
+// En el postman, cada requerimiento que se hace, nos arroja lo que está pasando en el cuadro donde corremos el código

@@ -1,18 +1,18 @@
 package com.example.demo.repository;
 
-import com.example.demo.domain.Person;
-import com.example.demo.domain.PersonId;
+import com.example.demo.domain.Product;
+import com.example.demo.domain.ProductId;
 
 import java.util.List;
 
-public interface PersonsRepository {
-    List<Person> list();
+public interface ProductRepository {
+    List<Product> list();
 
-    Person findOne(PersonId id);
+    Product findOne(ProductId id);
 
-    void create(Person person);
+    void create(Product product);
 
-    void update(PersonId id, Person person);
+    void update(ProductId id, Product product);
 
-    void delete(PersonId id);
+    void delete(ProductId id);
 }

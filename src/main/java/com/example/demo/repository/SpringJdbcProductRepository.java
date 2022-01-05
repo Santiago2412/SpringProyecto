@@ -1,8 +1,8 @@
 package com.example.demo.repository;
 
-import com.example.demo.domain.Person;
-import com.example.demo.domain.PersonId;
-import com.example.demo.domain.PersonName;
+import com.example.demo.domain.Product;
+import com.example.demo.domain.ProductId;
+import com.example.demo.domain.ProductName;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -12,65 +12,68 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Component
-public class SpringJdbcPersonsRepository implements PersonsRepository {
+public class SpringJdbcProductRepository implements ProductRepository {
     private final JdbcTemplate jdbcTemplate;
 
-    public SpringJdbcPersonsRepository(JdbcTemplate jdbcTemplate) {
+    public SpringJdbcProductRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private final RowMapper<Person> rowMapper = (resultSet, rowNum) -> {
-        PersonId personId = PersonId.fromString(
+    private final RowMapper<Product> rowMapper = (resultSet, rowNum) -> {
+        ProductId productId = ProductId.fromString(
                 resultSet.getString("id_number")
         );
-        PersonName personName = new PersonName(resultSet.getString("name"));
+        ProductName productName = new ProductName(resultSet.getString("name"));
 
         LocalDate birthday = resultSet.getDate("birthday").toLocalDate();
 
-        return new Person(
-                personId,
-                personName,
+
+        return new Product(
+                productId,
+                productName,
                 birthday
+
         );
     };
 
 
     @Override
-    public List<Person> list() {
-        String sqlQuery = "select * from persons ";
+    public List<Product> list() {
+        String sqlQuery = "select * from product ";
         return jdbcTemplate.query(sqlQuery, rowMapper);
     }
 
     @Override
-    public Person findOne(PersonId id) {
-        String sqlQuery = "select * from persons where id_number = ?";
+    public Product findOne(ProductId id) {
+        String sqlQuery = "select * from product where id_number = ?";
 
         return jdbcTemplate.queryForObject(sqlQuery, rowMapper, id.toString());
     }
 
     @Override
-    public void create(Person person) {
-        String sqlQuery = "insert into persons(id_number, name, birthday) values(?, ?, ?)";
+    public void create(Product product) {
+        String sqlQuery = "insert into product (id_number, name, birthday) values(?, ?, ?)";
         jdbcTemplate.update(sqlQuery, ps -> {
-            ps.setString(1, person.getId().toString());
-            ps.setString(2, person.getName().toString());
-            ps.setDate(3, Date.valueOf(person.getBirthday()));
+            ps.setString(1, product.getId().toString());
+            ps.setString(2, product.getName().toString());
+            ps.setDate(3, Date.valueOf(product.getBirthday()));
+
         });
     }
 
     @Override
-    public void update(PersonId id, Person person) {
-        String sqlQuery = "update persons set birthday = ?, name = ? where id_number = ?";
+    public void update(ProductId id, Product product) {
+        String sqlQuery = "update product set birthday = ?, name = ? where id_number = ?";
         jdbcTemplate.update(sqlQuery, ps -> {
-            ps.setDate(1, Date.valueOf(person.getBirthday()));
-            ps.setString(2, person.getName().toString());
+            ps.setDate(1, Date.valueOf(product.getBirthday()));
+            ps.setString(2, product.getName().toString());
             ps.setString(3, id.toString());
         });
     }
 
     @Override
-    public void delete(PersonId id) {
-        String sqlQuery = "delete from persons where id_number = ?";
+    public void delete(ProductId id) {
+        String sqlQuery = "delete from product where id_number = ?";
         jdbcTemplate.update(sqlQuery, id);
     }
 }

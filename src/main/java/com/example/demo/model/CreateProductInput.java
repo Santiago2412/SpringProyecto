@@ -2,14 +2,14 @@ package com.example.demo.model;
 
 import java.time.LocalDate;
 
-public class CreatePersonInput {
+public class CreateProductInput {
     private String name;
     private LocalDate birthday;
 
-    public CreatePersonInput() {
+    public CreateProductInput() {
     }
 
-    public CreatePersonInput(String name, LocalDate birthday) {
+    public CreateProductInput(String name, LocalDate birthday) {
         this.name = name;
         this.birthday = birthday;
     }

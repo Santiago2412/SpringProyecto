@@ -3,25 +3,25 @@ package com.example.demo.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Person {
-    private final PersonId id;
-    private final PersonName name;
+public class Product {
+    private final ProductId id_number;
+    private final ProductName name;
     private final LocalDate birthday;
 
-    public Person(PersonId id, PersonName name, LocalDate birthday) {
-        Objects.requireNonNull(id, "Person id can not be null");
-        Objects.requireNonNull(name, "Person name can not be null");
-        Objects.requireNonNull(birthday, "Person birthday can not be null");
-        this.id = id;
+    public Product(ProductId id_number, ProductName name, LocalDate birthday) {
+        Objects.requireNonNull(id_number, "Product id can not be null");
+        Objects.requireNonNull(name, "Product name can not be null");
+        Objects.requireNonNull(birthday, "Product birthday can not be null");
+        this.id_number = id_number;
         this.name = name;
         this.birthday = birthday;
     }
 
-    public PersonId getId() {
-        return id;
+    public ProductId getId() {
+        return id_number;
     }
 
-    public PersonName getName() {
+    public ProductName getName() {
         return name;
     }
 
@@ -31,8 +31,8 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id +
+        return "Product{" +
+                "id=" + id_number +
                 ", name=" + name +
                 '}';
     }

@@ -1,22 +1,22 @@
 package com.example.demo.model;
 
-import com.example.demo.domain.Person;
+import com.example.demo.domain.Product;
 
-public class CreatePersonOutput {
-    private Person person;
+public class CreateProductOutput {
+    private Product product;
 
-    public CreatePersonOutput() {
+    public CreateProductOutput() {
     }
 
-    public CreatePersonOutput(Person person) {
-        this.person = person;
+    public CreateProductOutput(Product product) {
+        this.product = product;
     }
 
-    public Person getPerson() {
-        return person;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

@@ -1,13 +1,12 @@
 package com.example.demo.configuration.jackson;
 
-import com.example.demo.configuration.jackson.codecs.PersonIdParser;
-import com.example.demo.configuration.jackson.codecs.PersonNameParser;
+import com.example.demo.configuration.jackson.codecs.ProductIdParser;
+import com.example.demo.configuration.jackson.codecs.ProductNameParser;
 import com.example.demo.configuration.jackson.codecs.ProductQuantityCodecs;
-import com.example.demo.domain.PersonId;
-import com.example.demo.domain.PersonName;
+import com.example.demo.domain.ProductId;
+import com.example.demo.domain.ProductName;
 import com.example.demo.domain.ProductQuantity;
 import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.core.util.VersionUtil;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class InternalModule extends SimpleModule {
@@ -21,11 +20,10 @@ public class InternalModule extends SimpleModule {
         addDeserializer(ProductQuantity.class, new ProductQuantityCodecs.Deserializer());
 
 
+        addSerializer(ProductId.class, new ProductIdParser.Serializer());
+        addDeserializer(ProductId.class, new ProductIdParser.Deserializer());
 
-        addSerializer(PersonId.class, new PersonIdParser.Serializer());
-        addDeserializer(PersonId.class, new PersonIdParser.Deserializer());
-
-        addSerializer(PersonName.class, new PersonNameParser.Serializer());
-        addDeserializer(PersonName.class, new PersonNameParser.Deserializer());
+        addSerializer(ProductName.class, new ProductNameParser.Serializer());
+        addDeserializer(ProductName.class, new ProductNameParser.Deserializer());
     }
 }

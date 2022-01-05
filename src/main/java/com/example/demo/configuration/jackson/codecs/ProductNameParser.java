@@ -1,6 +1,6 @@
 package com.example.demo.configuration.jackson.codecs;
 
-import com.example.demo.domain.PersonName;
+import com.example.demo.domain.ProductName;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -11,19 +11,19 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import java.io.IOException;
 
-public class PersonNameParser {
+public class ProductNameParser {
 
-    public static class Serializer extends JsonSerializer<PersonName> {
+    public static class Serializer extends JsonSerializer<ProductName> {
         @Override
-        public void serialize(PersonName value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        public void serialize(ProductName value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
             gen.writeString(value.toString());
         }
     }
 
-    public static class Deserializer extends JsonDeserializer<PersonName>{
+    public static class Deserializer extends JsonDeserializer<ProductName>{
         @Override
-        public PersonName deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
-            return new PersonName(p.getValueAsString());
+        public ProductName deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
+            return new ProductName(p.getValueAsString());
         }
     }
 }

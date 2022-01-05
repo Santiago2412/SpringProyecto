@@ -8,41 +8,41 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PersonServices {
+public class ProductServices {
 
 
     private ProductRepository repository;
 
-    public PersonServices(ProductRepository repository) {
+    public ProductServices(ProductRepository repository) {
         this.repository = repository;
     }
 
 
-    public List<Product> listPersons() {
+    public List<Product> listProduct() {
         return repository.list();
     }
 
 
-    public Product createPerson(Product person) {
-        repository.create(person);
-        return person;
+    public Product createProduct(Product product) {
+        repository.create(product);
+        return product;
     }
 
 
-    public Product getPerson(ProductId personId) {
-        return repository.findOne(personId);
+    public Product getProducts(ProductId productId) {
+        return repository.findOne(productId);
     }
 
 
-    public void deletePerson(ProductId personId) {
-        repository.delete(personId);
+    public void deleteProduct(ProductId productId) {
+        repository.delete(productId);
     }
 
 
-    public Product updatePerson(ProductId personId, Product person) {
-        repository.update(personId, person);
+    public Product updateProduct(ProductId productId, Product product) {
+        repository.update(productId, product);
 
-        return repository.findOne(personId);
+        return repository.findOne(productId);
     }
 
 }
